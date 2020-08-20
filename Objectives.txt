@@ -1,0 +1,29 @@
+WPF + VMMV
+
+We want an application that shows a view of the C:\ folder with a TreeView that contains the folders and files combined together in one tree.
+Only the names of the folders and files need to be shown.
+Protected system files and folders should not be displayed.
+
+Here are the required features:
+
+- The UI should show up quickly.
+- The UI should not freeze when expanding large folders in the tree.
+- Any I/O operation or computational operation should be done asynchronously to avoid locking up the UI.
+
+- Display information about the selection in the status bar:
+
+    - The first will be the number of items in the selected folder's immediate children.
+      This number is the same number you see in Explorer's status bar when you select a folder in the left pane. If you select a file, then it's simply "1 item".
+
+
+    - If a file is selected, the 2nd item in the status bar is the size of the file selected.
+    - If a folder is selected, the 2nd item in the status bar will be the count of files and folders contained in that folder recursively, and the size of the entire folder.
+
+    - If you select another folder while the values from the previous folder are still being calculated, you need to stop that operation and restart with the newly selected folder.
+    - Bonus if you can show progress of the calculations in the status bar. (For example, right-click on C:\Windows in Explorer, select Properties, and see how Explorer shows progress in the Properties dialog.)
+    - See the XAML for an idea of the format of the text, or you can also copy the format in Windows 10 Explorer's status bar.
+
+- Add an option to toggle whether hidden files/folders are shown (like the "Hidden items" in Explorer). Bonus if you can avoid having the TreeView reset and lose currently expanded folders.
+- Bonus if you want to display the file's icon, and sort the folders and files the same way as Explorer (name ascending-only is OK).
+
+- Code style is important. We like the standard C# style you get with Visual Studio out-of-the-box and recommended by Microsoft.

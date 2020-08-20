@@ -1,0 +1,44 @@
+﻿<Window x:Class="BaiscFileExplorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BaiscFileExplorer"
+        mc:Ignorable="d"
+        Title="Basic File Explorer" Height="600" Width="800" Icon="Images/drive.png">
+    <DockPanel>
+        <StatusBar Name="statusBar" DockPanel.Dock="Bottom">
+            <StatusBarItem Width="100">
+                <!-- Number of items in the selected folder -->
+                <TextBlock Name="ChildCount" Text="{Binding StatusBar.ItemCountText, Mode=TwoWay}" />
+            </StatusBarItem>
+            <StatusBarItem Width="555">
+                <!-- Statistics about the selected file/folder -->
+                <TextBlock Name="ItemSize" Text="{Binding StatusBar.ChildItemText, Mode=TwoWay}"/>
+            </StatusBarItem>
+            <StatusBarItem x:Name="Show_Hidden_Items" >
+                <CheckBox x:Name="HiddenItemsCheckBox" IsChecked="{Binding CanShowHiddenItemsCheckBox.CanShowHiddenItems, Mode=TwoWay}" Content="Show Hidden Items"/>
+                <!-- Tickbox -->
+
+            </StatusBarItem>
+        </StatusBar>
+        <TreeView Name="treeView" ItemsSource="{Binding TreeView.Items}">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Content}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="20" Margin="3" 
+                                    Source="{Binding ImageUri}" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+</Window>
